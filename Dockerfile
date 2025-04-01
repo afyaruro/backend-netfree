@@ -2,31 +2,38 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8081
-# ENV ConnectionStrings__DefaultConnection="Server=host.docker.internal,1433;Database=NetFree;User Id=sa;Password=Admin1234!;TrustServerCertificate=True;"
 
-# Etapa de build: imagen del SDK de .NET para compilar la aplicació
+# Etapa de build: imagen del SDK de .NET para compilar la aplicación
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 ENV PATH="$PATH:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-ef --version 8.0.0
+
+# Copiar archivos de la solución y proyectos
 COPY ["netfree.sln", "./"] 
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["Application/Application.csproj", "Application/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 COPY ["WebAPI/WebAPI.csproj", "WebAPI/"]
+
+# Restaurar dependencias
 RUN dotnet restore
+
+# Copiar el resto de los archivos del proyecto
 COPY . .
+
+# Compilar la aplicación
 WORKDIR "/src/WebAPI"
 RUN dotnet build -c Release -o /app/build
 
+# Publicar la aplicación
 FROM build AS publish
 RUN dotnet publish -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS final
+# Imagen final para ejecutar la aplicación
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-ENV PATH="$PATH:/root/.dotnet/tools"
-RUN dotnet tool install --global dotnet-ef --version 8.0.0
-COPY --from=publish /app/publish ./publish
-COPY --from=build /src /src
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY --from=publish /app/publish .
+
+# Comando de inicio
+CMD ["dotnet", "WebAPI.dll"]
