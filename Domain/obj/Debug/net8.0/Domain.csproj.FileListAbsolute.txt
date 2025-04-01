@@ -1,0 +1,11 @@
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/bin/Debug/net8.0/Domain.deps.json
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/bin/Debug/net8.0/Domain.dll
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/bin/Debug/net8.0/Domain.pdb
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/Domain.AssemblyInfoInputs.cache
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/Domain.csproj.CoreCompileInputs.cache
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/Domain.dll
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/refint/Domain.dll
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/Domain.pdb
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Domain/obj/Debug/net8.0/ref/Domain.dll
