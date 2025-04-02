@@ -1,11 +1,15 @@
 
+using Application.Service.Country;
+using Application.Service.Director.Dto;
+using Application.Service.Director.Mapping;
+using Domain.Entity.Response;
 using Domain.Port;
 
 namespace Application.Service.Director.Commands
 {
     public class GetByIdDirectorNameCommands
     {
-        public static async Task<string> GetByIdDirectorName(IDirectorRepository repository, int idDirector)
+        public static async Task<ResponseEntity<DirectorOutputDto>> GetByIdDirectorName(IDirectorRepository repository, int idDirector, CountryService countryService)
         {
             try
             {
@@ -14,10 +18,13 @@ namespace Application.Service.Director.Commands
 
                 if (resp == null)
                 {
-                    return "El pais no existe";
+                    return new ResponseEntity<DirectorOutputDto>("No existe", true);
                 }
+                var respDirector = new ResponseEntity<DirectorOutputDto>("Encontrado", MappingDirector.EntityToOutputDto(resp));
+                var countryResp = await countryService.GetByIdCountryName(resp.idCountry);
+                respDirector.entity!.country = countryResp.entity != null ? countryResp.entity.name : countryResp.message;
 
-                return $"{resp.firsName} {resp.lastName}";
+                return respDirector;
 
             }
             catch (Exception)

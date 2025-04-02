@@ -24,7 +24,10 @@ namespace Application.Service.Director.Commands
                 }
 
                 var output = MappingDirector.EntityToOutputDto(resp);
-                output.country = await service.GetByIdCountryName(resp.idCountry);
+
+                var countryResp = await service.GetByIdCountryName(resp.idCountry);
+                output.country = countryResp.entity != null ? countryResp.entity.name : countryResp.message;
+
                 return new ResponseEntity<DirectorOutputDto>("Director Obtenido", output);
 
             }

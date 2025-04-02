@@ -1,4 +1,5 @@
 using Application.Common.Exceptions;
+using Domain.Entity.Actor;
 using Domain.Entity.MovieActor;
 using Domain.Port;
 using Infrastructure.Context;
@@ -14,16 +15,17 @@ namespace Infrastructure.Adapters.ActorMovie
             _context = context;
         }
 
-        public async Task<List<string>> ActorsByMovieId(int movieId)
+        public async Task<List<ActorEntity>> ActorsByMovieId(int movieId)
         {
-            var actorNames = await (from ma in _context.movieActor
-                                    join a in _context.actor on ma.idActor equals a.Id
-                                    where ma.idMovie == movieId
-                                    select a.firsName + " " + a.lastName)
-                                   .ToListAsync();
+            var actors = await (from ma in _context.movieActor
+                                join a in _context.actor on ma.idActor equals a.Id
+                                where ma.idMovie == movieId
+                                select a)
+                               .ToListAsync();
 
-            return actorNames;
+            return actors;
         }
+
 
 
         public async Task<bool> MovieActorExists(int movieId, int actorId)

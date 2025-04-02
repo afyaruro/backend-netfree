@@ -44,8 +44,9 @@ namespace Application.Service.Director.Mapping
             {
 
                 var outputDto = EntityToOutputDto(entity);
-                var respCountry = await service.GetByIdCountryName(entity.idCountry);
-                outputDto.country = respCountry;
+                var countryResp = await service.GetByIdCountryName(entity.idCountry);
+                outputDto.country = countryResp.entity != null ? countryResp.entity.name : countryResp.message;
+
                 outputList.Add(outputDto);
             }
 

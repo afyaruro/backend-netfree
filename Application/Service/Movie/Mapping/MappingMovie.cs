@@ -60,10 +60,14 @@ namespace Application.Service.Movie.Mapping
             {
 
                 var outputDto = EntityToOutputDto(entity);
-                outputDto.country = await countryService.GetByIdCountryName(entity.idCountry);
-                outputDto.director = await directorService.GetByIdDirectorName(entity.idDirector);
-                outputDto.gender = await genderService.GetByIdGenderName(entity.idGenero);
-                outputDto.actors = await movieActorService.GetByActorsByIdMovie(entity.Id);
+                var countryResp = await countryService.GetByIdCountryName(entity.idCountry);
+                outputDto.country = countryResp.entity!;
+                var directorResp = await directorService.GetByIdDirectorName(entity.idDirector, countryService);
+                outputDto.director = directorResp.entity!;
+                var genderResp = await genderService.GetByIdGenderName(entity.idGenero);
+                outputDto.gender = genderResp.entity!;
+                var actors = await movieActorService.GetByActorsByIdMovie(entity.Id, countryService);
+                outputDto.actors = actors!;
                 outputList.Add(outputDto);
             }
 

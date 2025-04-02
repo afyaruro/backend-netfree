@@ -17,7 +17,7 @@ namespace Application.Service.Director
         public async Task<bool> Delete(int id) => await DeleteDirectorCommands.DeleteDirector(_repository, id);
         public async Task<ResponseEntity<DirectorOutputDto>> GetById(int id, CountryService service) => await GetByIdDirectorCommands.GetById(_repository, service, id);
         public async Task<bool> Update(DirectorUpdateDto dto, CountryService service) => await UpdateDirectorCommands.UpdateDirector(_repository, service, dto);
-        public async Task<string> GetByIdDirectorName(int id) => await GetByIdDirectorNameCommands.GetByIdDirectorName(_repository, id);
+        public async Task<ResponseEntity<DirectorOutputDto>> GetByIdDirectorName(int id, CountryService service) => await GetByIdDirectorNameCommands.GetByIdDirectorName(_repository, id, service);
 
     }
 }

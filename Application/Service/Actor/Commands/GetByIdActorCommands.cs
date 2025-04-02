@@ -24,7 +24,8 @@ namespace Application.Service.Actor.Commands
                 }
 
                 var output = MappingActor.EntityToOutputDto(resp);
-                output.country = await service.GetByIdCountryName(resp.idCountry);
+                var countryResp = await service.GetByIdCountryName(resp.idCountry);
+                output.country = countryResp.entity != null ? countryResp.entity.name : countryResp.message;
                 return new ResponseEntity<ActorOutputDto>("Actor Obtenido", output);
 
             }

@@ -32,9 +32,9 @@ namespace Application.Service.Movie.Commands
                 }
 
                 MovieOutputDto outputDto = MappingMovie.EntityToOutputDto(await resp);
-                outputDto.country = respCountry.entity!.name;
-                outputDto.director = $"{respDirector.entity!.firsName} {respDirector.entity!.lastName}";
-                outputDto.gender = respGender.entity!.name;
+                outputDto.country = respCountry.entity!;
+                outputDto.director = respDirector.entity!;
+                outputDto.gender = respGender.entity!;
                 outputDto.actors = [];
 
                 return new ResponseEntity<MovieOutputDto>("Pelicula Creada", outputDto);

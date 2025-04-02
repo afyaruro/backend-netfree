@@ -1,11 +1,14 @@
 
+using Application.Service.Country.Dto;
+using Application.Service.Country.Mapping;
+using Domain.Entity.Response;
 using Domain.Port;
 
 namespace Application.Service.Country.Commands
 {
     public static class GetByIdCountryNameCommands
     {
-        public static async Task<string> GetByIdCountryName(ICountryRepository repository, int idCountry)
+        public static async Task<ResponseEntity<CountryOutputDto>> GetByIdCountryName(ICountryRepository repository, int idCountry)
         {
             try
             {
@@ -14,10 +17,10 @@ namespace Application.Service.Country.Commands
 
                 if (resp == null)
                 {
-                    return "El pais no existe";
+                    return new ResponseEntity<CountryOutputDto>("No existe", true);
                 }
 
-                return resp.name;
+                return new ResponseEntity<CountryOutputDto>("Encontrado", MappingCountry.EntityToOutputDto(resp));
 
             }
             catch (Exception)

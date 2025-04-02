@@ -1,4 +1,7 @@
 
+using Application.Service.Gender.Dto;
+using Application.Service.Gender.Mapping;
+using Domain.Entity.Response;
 using Domain.Port;
 
 namespace Application.Service.Gender.Commands
@@ -6,7 +9,7 @@ namespace Application.Service.Gender.Commands
     public class GetByIdGenderNameCommands
     {
 
-        public static async Task<string> GetByIdGenderName(IGenderRepository repository, int idGender)
+        public static async Task<ResponseEntity<GenderOutputDto>> GetByIdGenderName(IGenderRepository repository, int idGender)
         {
             try
             {
@@ -15,10 +18,11 @@ namespace Application.Service.Gender.Commands
 
                 if (resp == null)
                 {
-                    return "El genero no existe";
+                    return new ResponseEntity<GenderOutputDto>("No existe", true);
                 }
 
-                return resp.name;
+                return new ResponseEntity<GenderOutputDto>("Encontrado", MappingGender.EntityToOutputDto(resp));
+
 
             }
             catch (Exception)

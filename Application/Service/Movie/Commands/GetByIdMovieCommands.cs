@@ -24,7 +24,10 @@ namespace Application.Service.Movie.Commands
                 }
 
                 var output = MappingMovie.EntityToOutputDto(resp);
-                output.country = await service.GetByIdCountryName(resp.idCountry);
+
+                var countryResp = await service.GetByIdCountryName(resp.idCountry);
+                output.country = countryResp.entity!;
+
 
                 return new ResponseEntity<MovieOutputDto>("Pelicula Obtenido", output);
 

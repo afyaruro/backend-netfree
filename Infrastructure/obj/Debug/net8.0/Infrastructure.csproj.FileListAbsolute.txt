@@ -17,3 +17,4 @@
 /home/afyaruro/Desktop/prueba-tecnica/netfree/Infrastructure/obj/Debug/net8.0/Infrastructure.pdb
 /home/afyaruro/Desktop/prueba-tecnica/netfree/Infrastructure/obj/Debug/net8.0/Infrastructure.genruntimeconfig.cache
 /home/afyaruro/Desktop/prueba-tecnica/netfree/Infrastructure/obj/Debug/net8.0/ref/Infrastructure.dll
+/home/afyaruro/Desktop/prueba-tecnica/netfree/Infrastructure/obj/Debug/net8.0/Infrastructure.sourcelink.json

@@ -47,7 +47,7 @@ namespace Application.Service.Actor.Mapping
 
                 var outputDto = EntityToOutputDto(entity);
                 var respCountry = await service.GetByIdCountryName(entity.idCountry);
-                outputDto.country = respCountry;
+                outputDto.country = respCountry.entity != null ? respCountry.entity.name : respCountry.message;
                 outputList.Add(outputDto);
             }
 

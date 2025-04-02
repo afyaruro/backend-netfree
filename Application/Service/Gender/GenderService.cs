@@ -17,7 +17,7 @@ namespace Application.Service.Gender
         public async Task<bool> Delete(int id) => await DeleteGenderCommands.DeleteGender(_repository, id);
         public async Task<ResponseEntity<GenderOutputDto>> GetById(int id) => await GetByIdGenderCommands.GetById(_repository, id);
         public async Task<bool> Update(GenderUpdateDto dto) => await UpdateGenderCommands.UpdateGender(_repository, dto);
-        public async Task<string> GetByIdGenderName(int id) => await GetByIdGenderNameCommands.GetByIdGenderName(_repository, id);
+        public async Task<ResponseEntity<GenderOutputDto>> GetByIdGenderName(int id) => await GetByIdGenderNameCommands.GetByIdGenderName(_repository, id);
 
     }
 }

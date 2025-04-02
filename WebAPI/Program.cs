@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(8081);
+    options.ListenAnyIP(8082);
 });
 
 builder.Services.AddControllers();
